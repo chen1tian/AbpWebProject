@@ -35,10 +35,7 @@ namespace AbpWebProject.WebApi
         public override void ConfigureServices(ServiceConfigurationContext context)
         {
             var services = context.Services;
-            //services.AddSingleton(new AsyncLocalCurrentTenantAccessor() { Current = new BasicTenantInfo(null, null) });
-
-            //var currentTenant = services.GetRequiredService<ICurrentTenant>();
-
+            
             Configure<AbpAspNetCoreMvcOptions>(options =>
             {
                 options
