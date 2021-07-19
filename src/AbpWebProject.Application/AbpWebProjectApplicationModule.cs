@@ -10,7 +10,8 @@ namespace AbpWebProject.Application
     [DependsOn(
         typeof(AbpWebProjectDomainMobule),
         typeof(AbpWebProjectEntityFrameworkModule),
-        typeof(AbpWebProjectApplicationContractsModule)
+        typeof(AbpWebProjectApplicationContractsModule),
+        typeof(AbpAutoMapperModule)
         )]
     public class AbpWebProjectApplicationModule : AbpModule
     {
@@ -19,7 +20,7 @@ namespace AbpWebProject.Application
             // 对象映射
             Configure<AbpAutoMapperOptions>(options =>
             {
-                options.AddMaps<AbpWebProjectApplicationModule>();
+                options.AddMaps<AbpWebProjectApplicationModule>(validate: true);
             });
         }
     }

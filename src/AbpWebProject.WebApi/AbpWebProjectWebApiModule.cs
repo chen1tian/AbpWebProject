@@ -15,6 +15,7 @@ using Volo.Abp;
 using Volo.Abp.AspNetCore.MultiTenancy;
 using Volo.Abp.AspNetCore.Mvc;
 using Volo.Abp.Autofac;
+using Volo.Abp.AutoMapper;
 using Volo.Abp.Modularity;
 using Volo.Abp.MultiTenancy;
 using Volo.Abp.Swashbuckle;
@@ -28,28 +29,53 @@ namespace AbpWebProject.WebApi
         typeof(AbpWebProjectDomainMobule),
         typeof(AbpWebProjectEntityFrameworkModule),
         typeof(AbpWebProjectApplicationContractsModule),
-        typeof(AbpWebProjectApplicationModule)        
+        typeof(AbpWebProjectApplicationModule),
+        typeof(AbpAutoMapperModule)
     )]
     public class AbpWebProjectWebApiModule : AbpModule
     {
         public override void ConfigureServices(ServiceConfigurationContext context)
         {
             var services = context.Services;
-            
+
+            ConfigureAutoApiControllers();
+            ConfigureAutoMapper();
+            ConfigureSwaggerServices(services);
+        }
+
+        private void ConfigureAutoApiControllers()
+        {
             Configure<AbpAspNetCoreMvcOptions>(options =>
             {
-                options
-                    .ConventionalControllers
-                    .Create(typeof(AbpWebProjectApplicationModule).Assembly);
+                options.ConventionalControllers.Create(typeof(AbpWebProjectApplicationModule).Assembly);
             });
+        }
 
+        /// <summary>
+        /// 配置AutoMapper
+        /// </summary>
+        private void ConfigureAutoMapper()
+        {
+            Configure<AbpAutoMapperOptions>(options =>
+            {
+                options.AddMaps<AbpWebProjectWebApiModule>(validate: true);
+            });
+        }
+
+        /// <summary>
+        /// 配置Swagger
+        /// </summary>
+        /// <param name="services"></param>
+        private void ConfigureSwaggerServices(IServiceCollection services)
+        {
             services.AddSwaggerGen(
                 options =>
                 {
                     options.SwaggerDoc("v1", new OpenApiInfo { Title = "AbpWebProject API", Version = "v1" });
                     options.DocInclusionPredicate((docName, description) => true);
-                });
-
+                    options.CustomSchemaIds(type => type.FullName);
+                }
+            );
         }
 
         public override void OnApplicationInitialization(ApplicationInitializationContext context)

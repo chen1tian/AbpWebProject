@@ -19,6 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\AbpWebProject.Application.Contracts\AbpWebProject.Application.Contracts.csproj" />
     <ProjectReference Include="..\AbpWebProject.Application\AbpWebProject.Application.csproj" />
     <ProjectReference Include="..\AbpWebProject.Domain\AbpWebProject.Domain.csproj" />
     <ProjectReference Include="..\AbpWebProject.EntityFramework\AbpWebProject.EntityFramework.csproj" />

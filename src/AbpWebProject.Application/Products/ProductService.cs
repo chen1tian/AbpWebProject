@@ -17,10 +17,5 @@ namespace AbpWebProject.Application.Products
         {
            
         }
-
-        public override Task<PagedResultDto<ProductDto>> GetListAsync(PagedAndSortedResultRequestDto input)
-        {
-            return base.GetListAsync(input);
-        }
     }
 }
