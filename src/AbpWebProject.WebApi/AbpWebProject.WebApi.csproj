@@ -1,0 +1,27 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="Controllers\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="5.0.8">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.1.4" />
+    <PackageReference Include="Volo.Abp.AspNetCore.MultiTenancy" Version="4.3.3" />
+    <PackageReference Include="Volo.Abp.Swashbuckle" Version="4.3.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\AbpWebProject.Application\AbpWebProject.Application.csproj" />
+    <ProjectReference Include="..\AbpWebProject.Domain\AbpWebProject.Domain.csproj" />
+    <ProjectReference Include="..\AbpWebProject.EntityFramework\AbpWebProject.EntityFramework.csproj" />
+  </ItemGroup>
+
+</Project>
