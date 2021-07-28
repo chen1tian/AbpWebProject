@@ -17,5 +17,10 @@ namespace AbpWebProject.Application.Products
         {
            
         }
+
+        public void Test()
+        { 
+            
+        }
     }
 }

@@ -1,7 +1,9 @@
 ﻿using AbpWebProject.Application;
 using AbpWebProject.Application.Contracts;
+using AbpWebProject.Application.Contracts.Products;
 using AbpWebProject.Domain;
 using AbpWebProject.EntityFramework;
+using Castle.DynamicProxy;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
@@ -16,9 +18,12 @@ using Volo.Abp.AspNetCore.MultiTenancy;
 using Volo.Abp.AspNetCore.Mvc;
 using Volo.Abp.Autofac;
 using Volo.Abp.AutoMapper;
+using Volo.Abp.Castle.DynamicProxy;
+using Volo.Abp.DynamicProxy;
 using Volo.Abp.Modularity;
 using Volo.Abp.MultiTenancy;
 using Volo.Abp.Swashbuckle;
+using Volo.Abp.Validation;
 
 namespace AbpWebProject.WebApi
 {
@@ -41,6 +46,38 @@ namespace AbpWebProject.WebApi
             ConfigureAutoApiControllers();
             ConfigureAutoMapper();
             ConfigureSwaggerServices(services);
+
+            ConfigureDaprService(services);
+        }
+
+        private static readonly ProxyGenerator ProxyGeneratorInstance = new ProxyGenerator();
+
+        private void ConfigureDaprService(IServiceCollection services)
+        {
+            var type = typeof(IProductService);
+            var interceptorType = typeof(DynamicDaprProxyInterceptor<>).MakeGenericType(type);
+            services.AddTransient(interceptorType);
+
+            var validationInterceptorAdapterType =
+                typeof(AbpAsyncDeterminationInterceptor<>).MakeGenericType(typeof(ValidationInterceptor));
+            var interceptorAdapterType = typeof(AbpAsyncDeterminationInterceptor<>).MakeGenericType(interceptorType);
+
+            services.AddTransient(
+                typeof(IDaprClientProxy<>).MakeGenericType(type),
+                serviceProvider =>
+                {
+                    var service = ProxyGeneratorInstance
+                        .CreateInterfaceProxyWithoutTarget(
+                            type,
+                            (IInterceptor)serviceProvider.GetRequiredService(validationInterceptorAdapterType),
+                            (IInterceptor)serviceProvider.GetRequiredService(interceptorAdapterType)
+                        );
+
+                    return Activator.CreateInstance(
+                        typeof(DaprClientProxy<>).MakeGenericType(type),
+                        service
+                    );
+                });
         }
 
         private void ConfigureAutoApiControllers()
