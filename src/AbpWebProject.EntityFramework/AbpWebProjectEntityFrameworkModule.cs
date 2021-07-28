@@ -40,12 +40,13 @@ namespace AbpWebProject.EntityFramework
 
         public override void OnApplicationInitialization(ApplicationInitializationContext context)
         {
+            base.OnApplicationInitialization(context);
+
+
             var app = context.GetApplicationBuilder();
 
             // 自动迁移数据库
             app.UseAutoMigration<AbpWebProjectDbContext>();
-
-            base.OnApplicationInitialization(context);
         }
     }
 }
