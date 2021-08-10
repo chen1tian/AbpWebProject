@@ -16,6 +16,7 @@ using System.Threading.Tasks;
 using Volo.Abp;
 using Volo.Abp.AspNetCore.MultiTenancy;
 using Volo.Abp.AspNetCore.Mvc;
+using Volo.Abp.AspNetCore.Mvc.AntiForgery;
 using Volo.Abp.Autofac;
 using Volo.Abp.AutoMapper;
 using Volo.Abp.Castle.DynamicProxy;
@@ -46,8 +47,17 @@ namespace AbpWebProject.WebApi
             ConfigureAutoApiControllers();
             ConfigureAutoMapper();
             ConfigureSwaggerServices(services);
+            ConfigureAbpAntiForgeryOptions();
 
             ConfigureDaprService(services);
+        }
+
+        private void ConfigureAbpAntiForgeryOptions()
+        {
+            Configure<AbpAntiForgeryOptions>(options =>
+            {
+                options.AutoValidate = false;
+            });
         }
 
         private static readonly ProxyGenerator ProxyGeneratorInstance = new ProxyGenerator();
