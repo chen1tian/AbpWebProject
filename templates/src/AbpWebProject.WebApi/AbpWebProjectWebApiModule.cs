@@ -48,8 +48,6 @@ namespace AbpWebProject.WebApi
             ConfigureAutoMapper();
             ConfigureSwaggerServices(services);
             ConfigureAbpAntiForgeryOptions();
-
-            ConfigureDaprService(services);
         }
 
         private void ConfigureAbpAntiForgeryOptions()
@@ -58,38 +56,6 @@ namespace AbpWebProject.WebApi
             {
                 options.AutoValidate = false;
             });
-        }
-
-        private static readonly ProxyGenerator ProxyGeneratorInstance = new ProxyGenerator();
-
-        private void ConfigureDaprService(IServiceCollection services)
-        {
-            services.AddDaprClient();
-
-            var type = typeof(IProductService);
-            var interceptorType = typeof(DynamicDaprProxyInterceptor<>).MakeGenericType(type);
-            services.AddTransient(interceptorType);
-
-            var validationInterceptorAdapterType =
-                typeof(AbpAsyncDeterminationInterceptor<>).MakeGenericType(typeof(ValidationInterceptor));
-            var interceptorAdapterType = typeof(AbpAsyncDeterminationInterceptor<>).MakeGenericType(interceptorType);
-
-            services.AddTransient(
-                typeof(IDaprClientProxy<>).MakeGenericType(type),
-                serviceProvider =>
-                {
-                    var service = ProxyGeneratorInstance
-                        .CreateInterfaceProxyWithoutTarget(
-                            type,
-                            (IInterceptor)serviceProvider.GetRequiredService(validationInterceptorAdapterType),
-                            (IInterceptor)serviceProvider.GetRequiredService(interceptorAdapterType)
-                        );
-
-                    return Activator.CreateInstance(
-                        typeof(DaprClientProxy<>).MakeGenericType(type),
-                        service
-                    );
-                });
         }
 
         private void ConfigureAutoApiControllers()
