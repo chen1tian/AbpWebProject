@@ -1,0 +1,12 @@
+{
+  "symbolInfo": {
+    "namespace": {
+      "longName": "namespace",
+      "shortName": "ns"
+    },
+    "k8sproject": {
+      "longName": "k8sproject",
+      "shortName": "p"
+    }
+  }
+}

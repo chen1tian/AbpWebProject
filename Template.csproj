@@ -1,0 +1,30 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <PackageType>Template</PackageType>
+    <PackageVersion>1.0</PackageVersion>
+    <PackageId>Ms.WebapiTemplate</PackageId>
+    <Title>微服务WebApi</Title>
+    <Authors>yitian.chen</Authors>
+    <Description>Templates to use when creating an application for micro service.</Description>
+    <PackageTags>dotnet-new;templates;ms</PackageTags>
+    <TargetFramework>netstandard2.0</TargetFramework>
+
+    <IncludeContentInPack>true</IncludeContentInPack>
+    <IncludeBuildOutput>false</IncludeBuildOutput>
+    <ContentTargetFolders>content</ContentTargetFolders>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="templates\**\*" Exclude="templates\**\bin\**;templates\**\obj\**" />
+    <Compile Remove="**\*" />
+  </ItemGroup>
+
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="IF NOT &quot;$(ConfigurationName)&quot;==&quot;Release&quot; EXIT /B 0&#xD;&#xA;del $(ProjectDir)bin\nuget\*.nupkg&#xD;&#xA;dotnet pack -o bin/nuget --configuration Release&#xD;&#xA;dotnet nuget push bin/nuget/ -k 123.123a -s http://nuget.cefcfco.com" />
+  </Target>
+
+  <ProjectExtensions><VisualStudio><UserProperties templates_4_1template_1config_4template_1json__JsonSchema="" /></VisualStudio></ProjectExtensions>
+
+</Project>

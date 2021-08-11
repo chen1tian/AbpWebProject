@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using Dapr.Client;
+using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Abstractions;
 using Microsoft.Extensions.Options;
 using Microsoft.Extensions.Primitives;
@@ -31,8 +32,31 @@ namespace AbpWebProject.Application
 {
     public class DynamicDaprProxyInterceptor<TService> : AbpInterceptor, ITransientDependency
     {
+        private readonly DaprClient _daprClient;
+
+        public DynamicDaprProxyInterceptor(DaprClient daprClient)
+        {
+            _daprClient = daprClient;
+        }
+
         public override Task InterceptAsync(IAbpMethodInvocation invocation)
         {
+            string appId = null;
+            var httpClient = DaprClient.CreateInvokeHttpClient(appId);
+
+            var isGenericMethod = invocation.Method.IsGenericMethod;
+
+
+            var pArr = invocation.Method.GetParameters().Select(x => x.ParameterType).ToArray();
+
+            var invokeMethod = _daprClient.GetType().GetMethod("CreateInvokeHttpClient", new Type[] {
+                                typeof(string),
+                typeof(string),
+                typeof(string)
+
+            });
+
+
             Console.WriteLine(invocation.Method.Name);
             return Task.CompletedTask;
         }

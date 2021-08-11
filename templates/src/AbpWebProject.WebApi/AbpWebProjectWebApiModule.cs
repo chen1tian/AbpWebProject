@@ -64,6 +64,8 @@ namespace AbpWebProject.WebApi
 
         private void ConfigureDaprService(IServiceCollection services)
         {
+            services.AddDaprClient();
+
             var type = typeof(IProductService);
             var interceptorType = typeof(DynamicDaprProxyInterceptor<>).MakeGenericType(type);
             services.AddTransient(interceptorType);

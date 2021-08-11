@@ -1,0 +1,30 @@
+{
+  "author": "yitian.chen",
+  "classifications": [ "abp.webapi" ],
+  "identity": "abp.webapi",
+  "name": "Abp WebApi project",
+  "shortName": "abp.webapi",
+  "sourceName": "AbpWebProject",
+  "preferNameDirectory": true,
+  "symbols": {
+    "k8sproject": {
+      "type": "parameter",
+      "replaces": "<K8sProject>",
+      "isRequired": true
+    },
+    "namespace": {
+      "type": "parameter",
+      "replaces": "<NameSpace>",
+      "isRequired": true
+    },
+    "nameLower": {
+      "type": "generated",
+      "generator": "casing",
+      "parameters": {
+        "source": "name",
+        "toLower": true
+      },
+      "replaces": "<DaprAppId>"
+    }
+  }
+}
