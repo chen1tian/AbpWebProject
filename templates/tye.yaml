@@ -8,6 +8,6 @@ namespace: <NameSpace>
 #- name: seq
 services:
 - name: <DaprAppId>-api
-  project: ./src/WebApiTemplate.Api/WebApiTemplate.Api.csproj
+  project: ./src/AbpWebProject.Api/AbpWebProject.Api.csproj
   bindings:
   - protocol: http
