@@ -11,6 +11,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Volo.Abp;
@@ -89,11 +90,13 @@ namespace AbpWebProject.WebApi
                     options.SwaggerDoc("v1", new OpenApiInfo { Title = "AbpWebProject API", Version = "v1" });
                     options.DocInclusionPredicate((docName, description) => true);
                     options.CustomSchemaIds(type => type.FullName);
-                    options.IncludeXmlComments("AbpWebProject.Domain.xml");
-                    options.IncludeXmlComments("AbpWebProject.EntityFramework.xml");
-                    options.IncludeXmlComments("AbpWebProject.Application.Contracts.xml");
-                    options.IncludeXmlComments("AbpWebProject.Application.xml");
-                    options.IncludeXmlComments("AbpWebProject.WebApi.xml");
+                    
+                    var baseDir = AppContext.BaseDirectory;
+                    options.IncludeXmlComments(Path.Combine(baseDir, "AbpWebProject.Domain.xml"));
+                    options.IncludeXmlComments(Path.Combine(baseDir, "AbpWebProject.EntityFramework.xml"));
+                    options.IncludeXmlComments(Path.Combine(baseDir, "AbpWebProject.Application.Contracts.xml"));
+                    options.IncludeXmlComments(Path.Combine(baseDir, "AbpWebProject.Application.xml"));
+                    options.IncludeXmlComments(Path.Combine(baseDir, "AbpWebProject.WebApi.xml"));
                 }
             );
         }
