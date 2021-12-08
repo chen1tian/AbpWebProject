@@ -13,7 +13,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AbpWebProject.EntityFramewo
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AbpWebProject.Domain", "src\AbpWebProject.Domain\AbpWebProject.Domain.csproj", "{9377AD98-96F7-4899-AB68-6B9F5B622603}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AbpWebProject.Application.Contracts", "src\AbpWebProject.Application.Contracts\AbpWebProject.Application.Contracts.csproj", "{2A54A05B-1C74-45D0-A427-CA593F44BAFE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AbpWebProject.Application.Contracts", "src\AbpWebProject.Application.Contracts\AbpWebProject.Application.Contracts.csproj", "{2A54A05B-1C74-45D0-A427-CA593F44BAFE}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_", "_", "{6924F7D3-0539-4961-850D-643772A762A0}"
+	ProjectSection(SolutionItems) = preProject
+		tye.yaml = tye.yaml
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

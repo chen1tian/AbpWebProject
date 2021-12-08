@@ -1,10 +1,10 @@
 name: gateway
 registry: docker-registry.dev.hrrdqh.com/<K8sProject>
 namespace: <NameSpace>
-extensions:
-- name: dapr
-  components-path: "./components/"
-- name: zipkin  
+#extensions:
+#- name: dapr
+#  components-path: "./components/"
+#- name: zipkin  
 #- name: seq
 services:
 - name: <DaprAppId>-api
