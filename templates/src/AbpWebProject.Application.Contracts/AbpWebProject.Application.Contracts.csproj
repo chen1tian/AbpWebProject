@@ -3,7 +3,15 @@
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
+  
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>AbpWebProject.Application.Contracts.xml</DocumentationFile>
+  </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DocumentationFile>AbpWebProject.Application.Contracts.xml</DocumentationFile>
+  </PropertyGroup>
+  
   <ItemGroup>
     <ProjectReference Include="..\AbpWebProject.Domain\AbpWebProject.Domain.csproj" />
     <ProjectReference Include="..\AbpWebProject.EntityFramework\AbpWebProject.EntityFramework.csproj" />

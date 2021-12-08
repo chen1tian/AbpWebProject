@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>AbpWebProject.WebApi</name>
+    </assembly>
+    <members>
+        <member name="M:AbpWebProject.WebApi.AbpWebProjectWebApiModule.ConfigureAutoMapper">
+            <summary>
+            配置AutoMapper
+            </summary>
+        </member>
+        <member name="M:AbpWebProject.WebApi.AbpWebProjectWebApiModule.ConfigureSwaggerServices(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            配置Swagger
+            </summary>
+            <param name="services"></param>
+        </member>
+    </members>
+</doc>

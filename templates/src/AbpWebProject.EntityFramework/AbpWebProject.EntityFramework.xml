@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>AbpWebProject.EntityFramework</name>
+    </assembly>
+    <members>
+        <member name="P:AbpWebProject.EntityFramework.AbpWebProjectDbContext.Product">
+            <summary>
+            产品
+            </summary>
+        </member>
+        <member name="M:AbpWebProject.EntityFramework.EfMigrateMiddleWare.UseAutoMigration(Microsoft.AspNetCore.Builder.IApplicationBuilder,Microsoft.EntityFrameworkCore.DbContext)">
+            <summary>
+            自动合并数据库
+            </summary>
+            <param name="app"></param>
+            <param name="db"></param>
+        </member>
+        <member name="M:AbpWebProject.EntityFramework.EfMigrateMiddleWare.UseAutoMigration``1(Microsoft.AspNetCore.Builder.IApplicationBuilder)">
+            <summary>
+            自动合并数据库
+            </summary>
+            <typeparam name="TDbContext"></typeparam>
+            <param name="app"></param>
+        </member>
+    </members>
+</doc>

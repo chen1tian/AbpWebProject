@@ -89,6 +89,11 @@ namespace AbpWebProject.WebApi
                     options.SwaggerDoc("v1", new OpenApiInfo { Title = "AbpWebProject API", Version = "v1" });
                     options.DocInclusionPredicate((docName, description) => true);
                     options.CustomSchemaIds(type => type.FullName);
+                    options.IncludeXmlComments("AbpWebProject.Domain.xml");
+                    options.IncludeXmlComments("AbpWebProject.EntityFramework.xml");
+                    options.IncludeXmlComments("AbpWebProject.Application.Contracts.xml");
+                    options.IncludeXmlComments("AbpWebProject.Application.xml");
+                    options.IncludeXmlComments("AbpWebProject.WebApi.xml");
                 }
             );
         }
