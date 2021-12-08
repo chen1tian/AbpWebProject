@@ -86,12 +86,16 @@ namespace AbpWebProject.WebApi
         /// <param name="services"></param>
         private void ConfigureSwaggerServices(IServiceCollection services)
         {
+            var configuration = services.GetConfiguration();
+            var basePath = configuration["Swagger:BasePath"];
+
             services.AddSwaggerGen(
                 options =>
                 {
                     options.SwaggerDoc("v1", new OpenApiInfo { Title = "AbpWebProject API", Version = "v1" });
                     options.DocInclusionPredicate((docName, description) => true);
                     options.CustomSchemaIds(type => type.FullName);
+                    options.DocumentFilter<SwaggerDocumentFilter>(basePath);
 
                     var baseDir = AppContext.BaseDirectory;
                     options.IncludeXmlComments(Path.Combine(baseDir, "AbpWebProject.Domain.xml"));
@@ -122,10 +126,13 @@ namespace AbpWebProject.WebApi
             app.UseConfiguredEndpoints();
 
 
-            app.UseSwagger();
+            app.UseSwagger(c =>
+            {
+                c.RouteTemplate = "AbpWebProject/swagger/{documentName}/swagger.json";
+            });
             app.UseAbpSwaggerUI(c =>
             {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "AbpWebProject API");
+                c.SwaggerEndpoint("/AbpWebProject/swagger/v1/swagger.json", "AbpWebProject API");
             });
 
             app.UseConfiguredEndpoints();
