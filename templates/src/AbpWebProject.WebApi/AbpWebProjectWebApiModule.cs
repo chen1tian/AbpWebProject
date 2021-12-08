@@ -21,10 +21,12 @@ using Volo.Abp.AspNetCore.Mvc.AntiForgery;
 using Volo.Abp.Autofac;
 using Volo.Abp.AutoMapper;
 using Volo.Abp.Castle.DynamicProxy;
+using Volo.Abp.Data;
 using Volo.Abp.DynamicProxy;
 using Volo.Abp.Modularity;
 using Volo.Abp.MultiTenancy;
 using Volo.Abp.Swashbuckle;
+using Volo.Abp.Threading;
 using Volo.Abp.Validation;
 
 namespace AbpWebProject.WebApi
@@ -90,7 +92,7 @@ namespace AbpWebProject.WebApi
                     options.SwaggerDoc("v1", new OpenApiInfo { Title = "AbpWebProject API", Version = "v1" });
                     options.DocInclusionPredicate((docName, description) => true);
                     options.CustomSchemaIds(type => type.FullName);
-                    
+
                     var baseDir = AppContext.BaseDirectory;
                     options.IncludeXmlComments(Path.Combine(baseDir, "AbpWebProject.Domain.xml"));
                     options.IncludeXmlComments(Path.Combine(baseDir, "AbpWebProject.EntityFramework.xml"));
@@ -127,6 +129,19 @@ namespace AbpWebProject.WebApi
             });
 
             app.UseConfiguredEndpoints();
+
+
+            // 数据库初始化数据
+            using (var scope = context.ServiceProvider.CreateScope())
+            {
+                AsyncHelper.RunSync(async () =>
+                {
+                    var seeder = scope.ServiceProvider
+                        .GetRequiredService<IDataSeeder>();
+
+                    await seeder.SeedAsync();
+                });
+            }
         }
     }
 }
