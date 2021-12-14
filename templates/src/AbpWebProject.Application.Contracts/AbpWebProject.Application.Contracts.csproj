@@ -11,6 +11,10 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <DocumentationFile>AbpWebProject.Application.Contracts.xml</DocumentationFile>
   </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Volo.Abp.Ddd.Application.Contracts" Version="4.4.4" />
+  </ItemGroup>
   
   <ItemGroup>
     <ProjectReference Include="..\AbpWebProject.Domain\AbpWebProject.Domain.csproj" />
