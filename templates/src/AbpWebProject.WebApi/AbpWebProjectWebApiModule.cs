@@ -5,6 +5,7 @@ using AbpWebProject.Domain;
 using AbpWebProject.EntityFramework;
 using Castle.DynamicProxy;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Hosting;
@@ -43,9 +44,12 @@ namespace AbpWebProject.WebApi
     )]
     public class AbpWebProjectWebApiModule : AbpModule
     {
+        public IConfiguration Configuration { get; set; }
+
         public override void ConfigureServices(ServiceConfigurationContext context)
         {
             var services = context.Services;
+            Configuration = services.GetConfiguration();
 
             ConfigureAutoApiControllers();
             ConfigureAutoMapper();
@@ -85,9 +89,8 @@ namespace AbpWebProject.WebApi
         /// </summary>
         /// <param name="services"></param>
         private void ConfigureSwaggerServices(IServiceCollection services)
-        {
-            var configuration = services.GetConfiguration();
-            var basePath = configuration["Swagger:BasePath"];
+        {            
+            var basePath = Configuration["Swagger:BasePath"];
 
             services.AddSwaggerGen(
                 options =>
@@ -111,6 +114,20 @@ namespace AbpWebProject.WebApi
         {
             var app = context.GetApplicationBuilder();
             var env = context.GetEnvironment();
+
+            // 跨域处理
+            var allowOrigins = Configuration["AllowOrigins"];
+            var allowOriginsArr = allowOrigins.Split(',');
+
+            app.UseCors(options =>
+            {
+                options
+                    .AllowAnyHeader()
+                    .AllowAnyMethod()
+                    .AllowCredentials()
+                    .WithOrigins(allowOriginsArr);
+            });
+
 
             if (env.IsDevelopment())
             {
