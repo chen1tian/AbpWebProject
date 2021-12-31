@@ -1,4 +1,4 @@
-name: gateway
+name: AbpWebProject
 registry: docker-registry.dev.hrrdqh.com/<K8sProject>
 namespace: <NameSpace>
 #extensions:
