@@ -3,7 +3,8 @@ WORKDIR /app
 COPY . /app
 EXPOSE 80
 #ÉèÖÃÊ±Çø
-RUN cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
+#RUN cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
+RUN ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
 RUN echo Asia/Shanghai > /etc/timezone	
 RUN sed -i 's/TLSv1.2/TLSv1.0/g' /etc/ssl/openssl.cnf
 RUN sed -i 's/TLSv1.2/TLSv1.0/g' /usr/lib/ssl/openssl.cnf
