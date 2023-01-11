@@ -4,11 +4,6 @@
         <name>AbpWebProject.EntityFramework</name>
     </assembly>
     <members>
-        <member name="P:AbpWebProject.EntityFramework.AbpWebProjectDbContext.Product">
-            <summary>
-            产品
-            </summary>
-        </member>
         <member name="M:AbpWebProject.EntityFramework.EfMigrateMiddleWare.UseAutoMigration(Microsoft.AspNetCore.Builder.IApplicationBuilder,Microsoft.EntityFrameworkCore.DbContext)">
             <summary>
             自动合并数据库

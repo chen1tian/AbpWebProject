@@ -4,25 +4,5 @@
         <name>AbpWebProject.Application.Contracts</name>
     </assembly>
     <members>
-        <member name="P:AbpWebProject.Application.Contracts.Products.CreateUpdateProductDto.Name">
-            <summary>
-            名称
-            </summary>
-        </member>
-        <member name="P:AbpWebProject.Application.Contracts.Products.CreateUpdateProductDto.Price">
-            <summary>
-            价格
-            </summary>
-        </member>
-        <member name="P:AbpWebProject.Application.Contracts.Products.ProductDto.Name">
-            <summary>
-            名称
-            </summary>
-        </member>
-        <member name="P:AbpWebProject.Application.Contracts.Products.ProductDto.Price">
-            <summary>
-            价格
-            </summary>
-        </member>
     </members>
 </doc>

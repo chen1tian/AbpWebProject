@@ -1,5 +1,4 @@
-﻿using AbpWebProject.Domain.Domains;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,13 +20,6 @@ namespace AbpWebProject.EntityFramework
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-
-            // modelBuilder.Entity<Product>(x => x.ConfigureByConvention());
         }
-
-        /// <summary>
-        /// 产品
-        /// </summary>
-        public DbSet<Product> Product { get; set; }
     }
 }

@@ -1,6 +1,4 @@
-﻿using AbpWebProject.Application.Contracts.Products;
-using AbpWebProject.Domain.Domains;
-using AutoMapper;
+﻿using AutoMapper;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,13 +12,13 @@ namespace AbpWebProject.Application
     {
         public AbpWebProjectApplicationAutoMapProfile()
         {
-            CreateMap<Product, ProductDto>();
+            //CreateMap<Product, ProductDto>();
 
-            CreateMap<CreateUpdateProductDto, Product>()
-                .IgnoreAuditedObjectProperties()
-                .Ignore(x => x.ExtraProperties)
-                .Ignore(x => x.ConcurrencyStamp)
-                ;
+            //CreateMap<CreateUpdateProductDto, Product>()
+            //    .IgnoreAuditedObjectProperties()
+            //    .Ignore(x => x.ExtraProperties)
+            //    .Ignore(x => x.ConcurrencyStamp)
+            //    ;
         }
     }
 }

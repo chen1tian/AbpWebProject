@@ -1,6 +1,5 @@
 ﻿using AbpWebProject.Application;
 using AbpWebProject.Application.Contracts;
-using AbpWebProject.Application.Contracts.Products;
 using AbpWebProject.Domain;
 using AbpWebProject.EntityFramework;
 using Castle.DynamicProxy;

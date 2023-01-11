@@ -4,15 +4,5 @@
         <name>AbpWebProject.Domain</name>
     </assembly>
     <members>
-        <member name="P:AbpWebProject.Domain.Domains.Product.Name">
-            <summary>
-            名称
-            </summary>
-        </member>
-        <member name="P:AbpWebProject.Domain.Domains.Product.Price">
-            <summary>
-            价格
-            </summary>
-        </member>
     </members>
 </doc>
