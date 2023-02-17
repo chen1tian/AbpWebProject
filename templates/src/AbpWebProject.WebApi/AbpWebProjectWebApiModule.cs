@@ -112,6 +112,10 @@ namespace AbpWebProject.WebApi
         public override void OnApplicationInitialization(ApplicationInitializationContext context)
         {
             var app = context.GetApplicationBuilder();
+
+            // 自动迁移数据库
+            app.UseAutoMigration<AbpWebProjectDbContext>();
+
             var env = context.GetEnvironment();
 
             // 跨域处理
