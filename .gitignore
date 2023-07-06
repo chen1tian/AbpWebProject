@@ -4,3 +4,5 @@
 
 /.vs/AbpWebProject
 /obj
+/bin
+/.vs/Template/FileContentIndex
