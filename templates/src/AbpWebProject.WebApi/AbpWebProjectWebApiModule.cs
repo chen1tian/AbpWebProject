@@ -105,6 +105,27 @@ namespace AbpWebProject.WebApi
                     options.IncludeXmlComments(Path.Combine(baseDir, "AbpWebProject.Application.Contracts.xml"));
                     options.IncludeXmlComments(Path.Combine(baseDir, "AbpWebProject.Application.xml"));
                     options.IncludeXmlComments(Path.Combine(baseDir, "AbpWebProject.WebApi.xml"));
+
+                    // 定义认证
+                    var securityScheme = new OpenApiSecurityScheme
+                    {
+                        Name = "JWT Authentication",
+                        Description = "**_只需要_**输入token，**_不要_**加Bearer",
+                        In = ParameterLocation.Header,
+                        Type = SecuritySchemeType.Http,
+                        Scheme = "bearer", // must be lower case
+                        BearerFormat = "JWT",
+                        Reference = new OpenApiReference
+                        {
+                            Id = "Bearer",
+                            Type = ReferenceType.SecurityScheme
+                        }
+                    };
+                    options.AddSecurityDefinition(securityScheme.Reference.Id, securityScheme);
+                    options.AddSecurityRequirement(new OpenApiSecurityRequirement
+                    {
+                        {securityScheme, new string[] { }}
+                    });
                 }
             );
         }
