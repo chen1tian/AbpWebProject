@@ -15,5 +15,47 @@
             </summary>
             <param name="services"></param>
         </member>
+        <member name="T:AbpWebProject.WebApi.Filter.ResultExceptionFilter">
+            <summary>
+            结果异常过滤器
+            </summary>
+        </member>
+        <member name="M:AbpWebProject.WebApi.Filter.ResultExceptionFilter.#ctor(Volo.Abp.AspNetCore.ExceptionHandling.IExceptionToErrorInfoConverter,Volo.Abp.AspNetCore.ExceptionHandling.IHttpExceptionStatusCodeFinder,Volo.Abp.Json.IJsonSerializer,Microsoft.Extensions.Options.IOptions{Volo.Abp.AspNetCore.ExceptionHandling.AbpExceptionHandlingOptions})">
+            <summary>
+            构造函数
+            </summary>
+            <param name="errorInfoConverter"></param>
+            <param name="statusCodeFinder"></param>
+            <param name="jsonSerializer"></param>
+            <param name="exceptionHandlingOptions"></param>
+        </member>
+        <member name="M:AbpWebProject.WebApi.Filter.ResultExceptionFilter.OnExceptionAsync(Microsoft.AspNetCore.Mvc.Filters.ExceptionContext)">
+            <summary>
+            发生异常时
+            </summary>
+            <param name="context"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AbpWebProject.WebApi.Filter.ResultExceptionFilter.ShouldHandleException(Microsoft.AspNetCore.Mvc.Filters.ExceptionContext)">
+            <summary>
+            是否应该处理异常
+            </summary>
+            <param name="context"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AbpWebProject.WebApi.Filter.ResultExceptionFilter.HandleAndWrapException(Microsoft.AspNetCore.Mvc.Filters.ExceptionContext)">
+            <summary>
+            处理并包装异常
+            </summary>
+            <param name="context"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AbpWebProject.WebApi.Filter.ResultExceptionFilter.SimplifyMessage(System.Exception)">
+            <summary>
+            简单异常消息
+            </summary>
+            <param name="error"></param>
+            <returns></returns>
+        </member>
     </members>
 </doc>

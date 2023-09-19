@@ -4,5 +4,56 @@
         <name>AbpWebProject.Domain</name>
     </assembly>
     <members>
+        <member name="T:AbpWebProject.Domain.ApiResults.WrapResult`1">
+            <summary>
+            包装结果
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="M:AbpWebProject.Domain.ApiResults.WrapResult`1.#ctor">
+            <summary>
+            构造函数
+            </summary>
+        </member>
+        <member name="P:AbpWebProject.Domain.ApiResults.WrapResult`1.Success">
+            <summary>
+            是否成功
+            </summary>
+        </member>
+        <member name="P:AbpWebProject.Domain.ApiResults.WrapResult`1.ErrorMessage">
+            <summary>
+            错误消息
+            </summary>
+        </member>
+        <member name="P:AbpWebProject.Domain.ApiResults.WrapResult`1.Data">
+            <summary>
+            数据
+            </summary>
+        </member>
+        <member name="P:AbpWebProject.Domain.ApiResults.WrapResult`1.ErrorCode">
+            <summary>
+            消息代码
+            </summary>
+        </member>
+        <member name="M:AbpWebProject.Domain.ApiResults.WrapResult`1.SetSuccess(`0,System.String,System.Int32)">
+            <summary>
+            设置成功结果
+            </summary>
+            <param name="data"></param>
+            <param name="message"></param>
+            <param name="code"></param>
+        </member>
+        <member name="M:AbpWebProject.Domain.ApiResults.WrapResult`1.SetFail(System.String,System.Int32)">
+            <summary>
+            设置失败结果
+            </summary>
+            <param name="message"></param>
+            <param name="code"></param>
+        </member>
+        <member name="T:AbpWebProject.Domain.ApiResults.WrapResultAttribute">
+            <summary>
+            包装结果的特性
+            </summary>
+        </member>
     </members>
 </doc>

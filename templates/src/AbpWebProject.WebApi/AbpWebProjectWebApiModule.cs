@@ -2,6 +2,7 @@
 using AbpWebProject.Application.Contracts;
 using AbpWebProject.Domain;
 using AbpWebProject.EntityFramework;
+using AbpWebProject.WebApi.Filter;
 using Castle.DynamicProxy;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
@@ -50,6 +51,13 @@ namespace AbpWebProject.WebApi
             var services = context.Services;
             Configuration = services.GetConfiguration();
 
+            // 增加结果包装器
+            services.AddMvcCore(options =>
+            {
+                options.Filters.Add(typeof(ResultExceptionFilter));
+                options.Filters.Add(typeof(ResultFilter));
+            });
+
             ConfigureAutoApiControllers();
             ConfigureAutoMapper();
             ConfigureSwaggerServices(services);
@@ -88,7 +96,7 @@ namespace AbpWebProject.WebApi
         /// </summary>
         /// <param name="services"></param>
         private void ConfigureSwaggerServices(IServiceCollection services)
-        {            
+        {
             var basePath = Configuration["Swagger:BasePath"];
 
             services.AddSwaggerGen(
@@ -164,20 +172,24 @@ namespace AbpWebProject.WebApi
 
             app.UseStaticFiles();
             app.UseRouting();
-            app.UseConfiguredEndpoints();
+            
+            // 如果启用swagger
+            var enableSwagger = Convert.ToBoolean(Configuration["Swagger:Enabled"]);
 
-
-            app.UseSwagger(c =>
+            if (enableSwagger)
             {
-                c.RouteTemplate = "AbpWebProject/swagger/{documentName}/swagger.json";
-            });
-            app.UseAbpSwaggerUI(c =>
-            {
-                c.SwaggerEndpoint("/AbpWebProject/swagger/v1/swagger.json", "AbpWebProject API");
-            });
+                app.UseSwagger(c =>
+                {
+                    c.RouteTemplate = "AbpWebProject/swagger/{documentName}/swagger.json";
+                });
+                app.UseAbpSwaggerUI(c =>
+                {
+                    c.SwaggerEndpoint("/AbpWebProject/swagger/v1/swagger.json", "AbpWebProject API");
+                });
+            }
 
+            // 中间件一般要放在此语句之前
             app.UseConfiguredEndpoints();
-
 
             // 数据库初始化数据
             using (var scope = context.ServiceProvider.CreateScope())
