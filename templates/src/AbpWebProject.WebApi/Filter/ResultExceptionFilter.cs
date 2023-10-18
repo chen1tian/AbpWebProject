@@ -44,13 +44,15 @@ namespace AbpWebProject.WebApi.Filter
             IExceptionToErrorInfoConverter errorInfoConverter,
             IHttpExceptionStatusCodeFinder statusCodeFinder,
             IJsonSerializer jsonSerializer,
-            IOptions<AbpExceptionHandlingOptions> exceptionHandlingOptions)
+            IOptions<AbpExceptionHandlingOptions> exceptionHandlingOptions,
+            ILogger<ResultExceptionFilter> logger
+            )
         {
             _errorInfoConverter = errorInfoConverter;
             _statusCodeFinder = statusCodeFinder;
             _jsonSerializer = jsonSerializer;
             _exceptionHandlingOptions = exceptionHandlingOptions.Value;
-            Logger = NullLogger<ResultExceptionFilter>.Instance;
+            Logger = logger;
         }
 
         /// <summary>
