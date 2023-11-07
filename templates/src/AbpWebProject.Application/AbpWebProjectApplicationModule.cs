@@ -6,6 +6,7 @@ using System;
 using Volo.Abp.Application;
 using Volo.Abp.AutoMapper;
 using Volo.Abp.Modularity;
+using Volo.Abp.SettingManagement;
 
 namespace AbpWebProject.Application
 {
@@ -14,7 +15,8 @@ namespace AbpWebProject.Application
         typeof(AbpWebProjectEntityFrameworkModule),
         typeof(AbpWebProjectApplicationContractsModule),
         typeof(AbpAutoMapperModule),
-        typeof(AbpDddApplicationModule)
+        typeof(AbpDddApplicationModule),
+        typeof(AbpSettingManagementApplicationModule)
         )]
     public class AbpWebProjectApplicationModule : AbpModule
     {

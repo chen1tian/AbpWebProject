@@ -10,6 +10,8 @@ using Volo.Abp.Autofac;
 using Volo.Abp.EntityFrameworkCore;
 using Volo.Abp.Modularity;
 using Volo.Abp.MultiTenancy;
+using Volo.Abp.SettingManagement.EntityFrameworkCore;
+using Volo.Abp.Settings;
 
 namespace AbpWebProject.EntityFramework
 {
@@ -17,7 +19,8 @@ namespace AbpWebProject.EntityFramework
         typeof(AbpWebProjectDomainMobule),
         typeof(AbpMultiTenancyModule),
         typeof(AbpEntityFrameworkCoreModule),
-        typeof(AbpAutofacModule)        
+        typeof(AbpAutofacModule),
+        typeof(AbpSettingManagementEntityFrameworkCoreModule)
         )]
     public class AbpWebProjectEntityFrameworkModule : AbpModule
     {

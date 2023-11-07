@@ -7,13 +7,17 @@ using Volo.Abp;
 using Volo.Abp.Domain;
 using Volo.Abp.Modularity;
 using Volo.Abp.MultiTenancy;
+using Volo.Abp.SettingManagement;
+using Volo.Abp.Settings;
 using Volo.Abp.Validation;
 
 namespace AbpWebProject.Domain
 {
     [DependsOn(
         typeof(AbpDddDomainModule),
-        typeof(AbpValidationModule)
+        typeof(AbpValidationModule),
+        typeof(AbpSettingsModule),
+        typeof(AbpSettingManagementDomainModule)
     )]
     public class AbpWebProjectDomainMobule : AbpModule
     {

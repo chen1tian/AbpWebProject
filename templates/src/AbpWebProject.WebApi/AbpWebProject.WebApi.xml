@@ -20,7 +20,7 @@
             结果异常过滤器
             </summary>
         </member>
-        <member name="M:AbpWebProject.WebApi.Filter.ResultExceptionFilter.#ctor(Volo.Abp.AspNetCore.ExceptionHandling.IExceptionToErrorInfoConverter,Volo.Abp.AspNetCore.ExceptionHandling.IHttpExceptionStatusCodeFinder,Volo.Abp.Json.IJsonSerializer,Microsoft.Extensions.Options.IOptions{Volo.Abp.AspNetCore.ExceptionHandling.AbpExceptionHandlingOptions})">
+        <member name="M:AbpWebProject.WebApi.Filter.ResultExceptionFilter.#ctor(Volo.Abp.AspNetCore.ExceptionHandling.IExceptionToErrorInfoConverter,Volo.Abp.AspNetCore.ExceptionHandling.IHttpExceptionStatusCodeFinder,Volo.Abp.Json.IJsonSerializer,Microsoft.Extensions.Options.IOptions{Volo.Abp.AspNetCore.ExceptionHandling.AbpExceptionHandlingOptions},Microsoft.Extensions.Logging.ILogger{AbpWebProject.WebApi.Filter.ResultExceptionFilter})">
             <summary>
             构造函数
             </summary>
@@ -55,6 +55,22 @@
             简单异常消息
             </summary>
             <param name="error"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AbpWebProject.WebApi.Filter.ResultFilter.HasControllerAttribute``1(Microsoft.AspNetCore.Mvc.Filters.ResultExecutingContext)">
+            <summary>
+            Controller上是否有特性
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="context"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AbpWebProject.WebApi.Filter.ResultFilter.HasActionAttribute``1(Microsoft.AspNetCore.Mvc.Filters.ResultExecutingContext)">
+            <summary>
+            Controller上是否有特性
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="context"></param>
             <returns></returns>
         </member>
     </members>

@@ -4,6 +4,11 @@
         <name>AbpWebProject.Domain</name>
     </assembly>
     <members>
+        <member name="T:AbpWebProject.Domain.ApiResults.DontWrapResultAttribute">
+            <summary>
+            不要包装结果的特性
+            </summary>
+        </member>
         <member name="T:AbpWebProject.Domain.ApiResults.WrapResult`1">
             <summary>
             包装结果

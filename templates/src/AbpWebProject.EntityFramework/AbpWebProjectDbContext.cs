@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 using Volo.Abp.Data;
 using Volo.Abp.EntityFrameworkCore;
 using Volo.Abp.EntityFrameworkCore.Modeling;
+using Volo.Abp.SettingManagement;
+using Volo.Abp.Settings;
 
 namespace AbpWebProject.EntityFramework
 {
@@ -21,5 +23,17 @@ namespace AbpWebProject.EntityFramework
         {
             base.OnModelCreating(modelBuilder);
         }
+
+        #region 实体
+        /// <summary>
+        /// App设置
+        /// </summary>
+        public virtual DbSet<Setting> AbpSettings { get; set; }
+
+        /// <summary>
+        /// App设置定义
+        /// </summary>
+        public DbSet<SettingDefinitionRecord> AbpSettingDefinitions { get; set; }
+        #endregion
     }
 }
