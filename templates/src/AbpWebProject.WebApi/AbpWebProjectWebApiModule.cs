@@ -134,6 +134,9 @@ namespace AbpWebProject.WebApi
                     {
                         {securityScheme, new string[] { }}
                     });
+
+                    // 将枚举类型转换为Description字符串
+                    options.SchemaFilter<SwaggerEnumSchemaFilter>();
                 }
             );
         }
@@ -172,7 +175,7 @@ namespace AbpWebProject.WebApi
 
             app.UseStaticFiles();
             app.UseRouting();
-            
+
             // 如果启用swagger
             var enableSwagger = Convert.ToBoolean(Configuration["Swagger:Enabled"]);
 

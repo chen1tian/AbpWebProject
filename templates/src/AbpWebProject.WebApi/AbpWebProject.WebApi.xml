@@ -73,5 +73,12 @@
             <param name="context"></param>
             <returns></returns>
         </member>
+        <member name="M:AbpWebProject.WebApi.Filter.SwaggerEnumSchemaFilter.Apply(Microsoft.OpenApi.Models.OpenApiSchema,Swashbuckle.AspNetCore.SwaggerGen.SchemaFilterContext)">
+            <summary>
+            实现接口
+            </summary>
+            <param name="model"></param>
+            <param name="context"></param>
+        </member>
     </members>
 </doc>

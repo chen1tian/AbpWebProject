@@ -60,5 +60,10 @@
             包装结果的特性
             </summary>
         </member>
+        <member name="T:AbpWebProject.Domain.Extensions.ObjectExtension">
+            <summary>
+            返回对象的Description标注数据
+            </summary>
+        </member>
     </members>
 </doc>
