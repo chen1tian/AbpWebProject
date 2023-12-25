@@ -136,7 +136,8 @@ namespace AbpWebProject.WebApi
                     });
 
                     // 将枚举类型转换为Description字符串
-                    options.SchemaFilter<SwaggerEnumSchemaFilter>();
+                    // 使用的话，会将测试用的参数也转换为字符串，导致无法测试
+                    //options.SchemaFilter<SwaggerEnumSchemaFilter>();
                 }
             );
         }
