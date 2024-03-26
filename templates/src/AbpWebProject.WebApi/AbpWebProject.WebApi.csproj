@@ -30,6 +30,8 @@
     <ProjectReference Include="..\AbpWebProject.Application.Contracts\AbpWebProject.Application.Contracts.csproj" />
     <ProjectReference Include="..\AbpWebProject.Application\AbpWebProject.Application.csproj" />
     <ProjectReference Include="..\AbpWebProject.Domain\AbpWebProject.Domain.csproj" />
+    <ProjectReference Include="..\AbpWebProject.EntityFramework.MySql\AbpWebProject.EntityFramework.MySql.csproj" />
+    <ProjectReference Include="..\AbpWebProject.EntityFramework.SqlServer\AbpWebProject.EntityFramework.SqlServer.csproj" />
     <ProjectReference Include="..\AbpWebProject.EntityFramework\AbpWebProject.EntityFramework.csproj" />
   </ItemGroup>
 

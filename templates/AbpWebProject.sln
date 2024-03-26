@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.31424.327
+# Visual Studio Version 17
+VisualStudioVersion = 17.9.34714.143
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{0AC3CB5D-78BD-4EB3-BA36-1E30F07116AA}"
 EndProject
@@ -19,6 +19,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_", "_", "{6924F7D3-0539-49
 	ProjectSection(SolutionItems) = preProject
 		tye.yaml = tye.yaml
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AbpWebProject.EntityFramework.SqlServer", "src\AbpWebProject.EntityFramework.SqlServer\AbpWebProject.EntityFramework.SqlServer.csproj", "{39E342E3-D212-4926-B891-271036CA43F7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AbpWebProject.EntityFramework.MySql", "src\AbpWebProject.EntityFramework.MySql\AbpWebProject.EntityFramework.MySql.csproj", "{3078B179-20CC-4B5E-A613-B2A713D02D67}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -46,6 +50,14 @@ Global
 		{2A54A05B-1C74-45D0-A427-CA593F44BAFE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2A54A05B-1C74-45D0-A427-CA593F44BAFE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2A54A05B-1C74-45D0-A427-CA593F44BAFE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{39E342E3-D212-4926-B891-271036CA43F7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{39E342E3-D212-4926-B891-271036CA43F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{39E342E3-D212-4926-B891-271036CA43F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{39E342E3-D212-4926-B891-271036CA43F7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3078B179-20CC-4B5E-A613-B2A713D02D67}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3078B179-20CC-4B5E-A613-B2A713D02D67}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3078B179-20CC-4B5E-A613-B2A713D02D67}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3078B179-20CC-4B5E-A613-B2A713D02D67}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -56,6 +68,8 @@ Global
 		{1AB19CBD-BD65-4C77-AD4A-871CE387B5A6} = {0AC3CB5D-78BD-4EB3-BA36-1E30F07116AA}
 		{9377AD98-96F7-4899-AB68-6B9F5B622603} = {0AC3CB5D-78BD-4EB3-BA36-1E30F07116AA}
 		{2A54A05B-1C74-45D0-A427-CA593F44BAFE} = {0AC3CB5D-78BD-4EB3-BA36-1E30F07116AA}
+		{39E342E3-D212-4926-B891-271036CA43F7} = {0AC3CB5D-78BD-4EB3-BA36-1E30F07116AA}
+		{3078B179-20CC-4B5E-A613-B2A713D02D67} = {0AC3CB5D-78BD-4EB3-BA36-1E30F07116AA}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {B638A270-2C42-4AF2-8496-465CD49C2612}

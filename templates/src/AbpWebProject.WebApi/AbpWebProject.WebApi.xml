@@ -4,6 +4,18 @@
         <name>AbpWebProject.WebApi</name>
     </assembly>
     <members>
+        <member name="M:AbpWebProject.WebApi.AbpWebProjectWebApiModule.ConfigureSqlServerDbContext(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            配置数据库
+            </summary>
+            <exception cref="T:System.Exception"></exception>
+        </member>
+        <member name="M:AbpWebProject.WebApi.AbpWebProjectWebApiModule.ConfigureMySqlDbContext(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            配置数据库
+            </summary>
+            <exception cref="T:System.Exception"></exception>
+        </member>
         <member name="M:AbpWebProject.WebApi.AbpWebProjectWebApiModule.ConfigureAutoMapper">
             <summary>
             配置AutoMapper

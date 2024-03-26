@@ -2,9 +2,12 @@
 using AbpWebProject.Application.Contracts;
 using AbpWebProject.Domain;
 using AbpWebProject.EntityFramework;
+using AbpWebProject.EntityFramework.SqlServer;
 using AbpWebProject.WebApi.Filter;
+using Autofac.Core;
 using Castle.DynamicProxy;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
@@ -24,11 +27,13 @@ using Volo.Abp.AutoMapper;
 using Volo.Abp.Castle.DynamicProxy;
 using Volo.Abp.Data;
 using Volo.Abp.DynamicProxy;
+using Volo.Abp.EntityFrameworkCore;
 using Volo.Abp.Modularity;
 using Volo.Abp.MultiTenancy;
 using Volo.Abp.Swashbuckle;
 using Volo.Abp.Threading;
 using Volo.Abp.Validation;
+using AbpWebProject.EntityFramework.MySql;
 
 namespace AbpWebProject.WebApi
 {
@@ -62,6 +67,40 @@ namespace AbpWebProject.WebApi
             ConfigureAutoMapper();
             ConfigureSwaggerServices(services);
             ConfigureAbpAntiForgeryOptions();
+            ConfigureSqlServerDbContext(services);
+        }
+
+        /// <summary>
+        /// 配置数据库
+        /// </summary>
+        /// <exception cref="Exception"></exception>
+        private void ConfigureSqlServerDbContext(IServiceCollection services)
+        {
+            Configure<AbpDbContextOptions>(options =>
+            {
+                // 增加Db到服务中, 否则执行迁移命令时会报错
+                services.AddDbContext<AbpWebProjectDbContext>();
+
+                options.UseSqlServerDb<AbpWebProjectDbContext>();   // 修改此处
+            });
+        }
+
+        /// <summary>
+        /// 配置数据库
+        /// </summary>
+        /// <exception cref="Exception"></exception>
+        private void ConfigureMySqlDbContext(IServiceCollection services)
+        {
+            // 增加Db到服务中, 否则执行迁移命令时会报错
+            services.AddDbContext<AbpWebProjectDbContext>();
+
+            // 增加Db到服务中
+            var connectionString = Configuration.GetConnectionString("MySql");
+
+            Configure<AbpDbContextOptions>(options =>
+            {
+                options.UseMySqlDb<AbpWebProjectDbContext>(connectionString);
+            });
         }
 
         private void ConfigureAbpAntiForgeryOptions()
