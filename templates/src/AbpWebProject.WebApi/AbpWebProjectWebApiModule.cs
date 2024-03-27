@@ -34,6 +34,7 @@ using Volo.Abp.Swashbuckle;
 using Volo.Abp.Threading;
 using Volo.Abp.Validation;
 using AbpWebProject.EntityFramework.MySql;
+using Volo.Abp.SettingManagement.EntityFrameworkCore;
 
 namespace AbpWebProject.WebApi
 {
@@ -81,7 +82,8 @@ namespace AbpWebProject.WebApi
                 // 增加Db到服务中, 否则执行迁移命令时会报错
                 services.AddDbContext<AbpWebProjectDbContext>();
 
-                options.UseSqlServerDb<AbpWebProjectDbContext>();   // 修改此处
+                options.UseSqlServerDb<AbpWebProjectDbContext>();
+                options.UseSqlServerDb<SettingManagementDbContext>();
             });
         }
 
@@ -100,6 +102,7 @@ namespace AbpWebProject.WebApi
             Configure<AbpDbContextOptions>(options =>
             {
                 options.UseMySqlDb<AbpWebProjectDbContext>(connectionString);
+                options.UseMySqlDb<SettingManagementDbContext>(connectionString);
             });
         }
 
