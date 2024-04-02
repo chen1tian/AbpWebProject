@@ -5,6 +5,8 @@ using Microsoft.AspNetCore.Mvc.Filters;
 using System;
 using System.Linq;
 using System.Net;
+using System.Text.Json.Serialization;
+using System.Text.Json;
 using Volo.Abp.AspNetCore.Mvc;
 using Volo.Abp.DependencyInjection;
 using Volo.Abp.Json;
@@ -36,13 +38,16 @@ namespace AbpWebProject.WebApi.Filter
                     result.SetSuccess(((ObjectResult)context.Result).Value);
                 }
 
-                var jsonSerializer = context.GetService<IJsonSerializer>();
+                JsonSerializerOptions options = new()
+                {
+                    ReferenceHandler = ReferenceHandler.IgnoreCycles
+                };
 
                 context.Result = new ContentResult()
                 {
                     StatusCode = (int)HttpStatusCode.OK,
                     ContentType = "application/json;charset=utf-8",
-                    Content = jsonSerializer.Serialize(result)
+                    Content = JsonSerializer.Serialize(result, options)
                 };
             }
         }
