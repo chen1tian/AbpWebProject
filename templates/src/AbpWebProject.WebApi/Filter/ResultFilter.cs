@@ -10,6 +10,9 @@ using System.Text.Json;
 using Volo.Abp.AspNetCore.Mvc;
 using Volo.Abp.DependencyInjection;
 using Volo.Abp.Json;
+using System.Net.Http.Json;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 
 namespace AbpWebProject.WebApi.Filter
 {
@@ -38,16 +41,17 @@ namespace AbpWebProject.WebApi.Filter
                     result.SetSuccess(((ObjectResult)context.Result).Value);
                 }
 
-                JsonSerializerOptions options = new()
+                var content = JsonConvert.SerializeObject(result, new JsonSerializerSettings()
                 {
-                    ReferenceHandler = ReferenceHandler.IgnoreCycles
-                };
+                    ContractResolver = new CamelCasePropertyNamesContractResolver(),
+                    ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+                });
 
                 context.Result = new ContentResult()
                 {
                     StatusCode = (int)HttpStatusCode.OK,
                     ContentType = "application/json;charset=utf-8",
-                    Content = JsonSerializer.Serialize(result, options)
+                    Content = content
                 };
             }
         }
