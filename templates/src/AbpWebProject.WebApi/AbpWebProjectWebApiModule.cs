@@ -35,6 +35,11 @@ using Volo.Abp.Threading;
 using Volo.Abp.Validation;
 using AbpWebProject.EntityFramework.MySql;
 using Volo.Abp.SettingManagement.EntityFrameworkCore;
+using AbpWebProject.Application.Contracts.Jwt.Dto;
+using System.Text;
+using AbpWebProject.Domain.Config;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
 
 namespace AbpWebProject.WebApi
 {
@@ -69,6 +74,61 @@ namespace AbpWebProject.WebApi
             ConfigureSwaggerServices(services);
             ConfigureAbpAntiForgeryOptions();
             ConfigureSqlServerDbContext(services);
+
+            // 注入jwt配置
+            services.Configure<JwtOptions>(Configuration.GetSection("Jwt"));
+            // 配置认证
+            ConfigureAuth(services);
+            ConfigureAuthorization(services);
+
+            Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
+
+            services.AddResponseCompression();
+        }
+
+        /// <summary>
+        /// 配置认证
+        /// </summary>
+        /// <param name="services"></param>
+        /// <exception cref="NotImplementedException"></exception>
+        private void ConfigureAuth(IServiceCollection services)
+        {
+            // 配置jwt认证
+            services.AddAuthentication(options =>
+            {
+                options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+                .AddJwtBearer(options =>
+                {
+                    options.TokenValidationParameters = new TokenValidationParameters()
+                    {
+                        ValidateIssuer = true, //是否验证Issuer
+                        ValidIssuer = Configuration["Jwt:Issuer"], //发行人Issuer
+                        ValidateAudience = true, //是否验证Audience
+                        ValidAudience = Configuration["Jwt:Audience"], //订阅人Audience
+                        ValidateIssuerSigningKey = true, //是否验证SecurityKey
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Jwt:SecretKey"])), //SecurityKey
+                        ValidateLifetime = true, //是否验证失效时间
+                        ClockSkew = TimeSpan.FromSeconds(30), //过期时间容错值，解决服务器端时间不同步问题（秒）
+                        RequireExpirationTime = true,
+                    };
+                });
+        }
+
+        /// <summary>
+        /// 配置权限
+        /// </summary>
+        /// <param name="services"></param>
+        /// <exception cref="NotImplementedException"></exception>
+        private void ConfigureAuthorization(IServiceCollection services)
+        {
+            services.AddAuthorization(
+                options =>
+                {
+                    options.AddPolicy(Consts.Policys.SuperAdmin, policy =>
+                        policy.RequireClaim(Consts.ClaimTypes.IsSuperAdmin, true.ToString()));
+                }
+             );
         }
 
         /// <summary>
@@ -233,6 +293,9 @@ namespace AbpWebProject.WebApi
                     c.SwaggerEndpoint("/AbpWebProject/swagger/v1/swagger.json", "AbpWebProject API");
                 });
             }
+
+            app.UseAuthentication();
+            app.UseAuthorization();
 
             // 中间件一般要放在此语句之前
             app.UseConfiguredEndpoints();

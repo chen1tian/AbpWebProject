@@ -14,6 +14,16 @@
             App设置定义
             </summary>
         </member>
+        <member name="P:AbpWebProject.EntityFramework.AbpWebProjectDbContext.RefreshToken">
+            <summary>
+            刷新Token
+            </summary>
+        </member>
+        <member name="P:AbpWebProject.EntityFramework.AbpWebProjectDbContext.User">
+            <summary>
+            用户
+            </summary>
+        </member>
         <member name="M:AbpWebProject.EntityFramework.EfMigrateMiddleWare.UseAutoMigration(Microsoft.AspNetCore.Builder.IApplicationBuilder,Microsoft.EntityFrameworkCore.DbContext)">
             <summary>
             自动合并数据库
@@ -27,6 +37,11 @@
             </summary>
             <typeparam name="TDbContext"></typeparam>
             <param name="app"></param>
+        </member>
+        <member name="T:CruiseTimeGJ.EntityFramework.Seeds.UserDataSeedContributor">
+            <summary>
+            用户数据种子贡献者
+            </summary>
         </member>
     </members>
 </doc>

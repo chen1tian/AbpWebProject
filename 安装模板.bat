@@ -1,2 +1,2 @@
-dotnet new -i ./templates
+dotnet new -i ./templates --force
 pause

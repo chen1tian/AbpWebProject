@@ -10,12 +10,12 @@
     "k8sproject": {
       "type": "parameter",
       "replaces": "<K8sProject>",
-      "isRequired": true
+      "isRequired": false
     },
     "namespace": {
       "type": "parameter",
       "replaces": "<NameSpace>",
-      "isRequired": true
+      "isRequired": false
     },
     "nameLower": {
       "type": "generated",

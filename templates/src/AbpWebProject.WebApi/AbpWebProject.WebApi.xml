@@ -4,6 +4,20 @@
         <name>AbpWebProject.WebApi</name>
     </assembly>
     <members>
+        <member name="M:AbpWebProject.WebApi.AbpWebProjectWebApiModule.ConfigureAuth(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            配置认证
+            </summary>
+            <param name="services"></param>
+            <exception cref="T:System.NotImplementedException"></exception>
+        </member>
+        <member name="M:AbpWebProject.WebApi.AbpWebProjectWebApiModule.ConfigureAuthorization(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            配置权限
+            </summary>
+            <param name="services"></param>
+            <exception cref="T:System.NotImplementedException"></exception>
+        </member>
         <member name="M:AbpWebProject.WebApi.AbpWebProjectWebApiModule.ConfigureSqlServerDbContext(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
             <summary>
             配置数据库
