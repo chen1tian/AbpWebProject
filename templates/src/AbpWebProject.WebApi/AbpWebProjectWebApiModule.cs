@@ -40,6 +40,10 @@ using System.Text;
 using AbpWebProject.Domain.Config;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
+using Polly;
+using Microsoft.AspNetCore.SignalR;
+using AbpWebProject.Domain.SignalR;
+using Volo.Abp.AspNetCore.SignalR;
 
 namespace AbpWebProject.WebApi
 {
@@ -51,6 +55,7 @@ namespace AbpWebProject.WebApi
         typeof(AbpWebProjectEntityFrameworkModule),
         typeof(AbpWebProjectApplicationContractsModule),
         typeof(AbpWebProjectApplicationModule),
+        typeof(AbpAspNetCoreSignalRModule),
         typeof(AbpAutoMapperModule)
     )]
     public class AbpWebProjectWebApiModule : AbpModule
@@ -113,6 +118,17 @@ namespace AbpWebProject.WebApi
                         RequireExpirationTime = true,
                     };
                 });
+        }
+
+        /// <summary>
+        /// 配置SignalR
+        /// </summary>
+        private void ConfigureSignalR(IServiceCollection services)
+        {
+            // 注入SignalR的UserId提供者
+            services.AddSingleton<IUserIdProvider, SignalRUserIdProvider>();
+            // 配置SignalR
+            services.AddTransient<MsgHub>();
         }
 
         /// <summary>
@@ -298,7 +314,11 @@ namespace AbpWebProject.WebApi
             app.UseAuthorization();
 
             // 中间件一般要放在此语句之前
-            app.UseConfiguredEndpoints();
+            app.UseConfiguredEndpoints(endpoints =>
+            {
+                // config signalr
+                endpoints.MapHub<MsgHub>("/api/app/msg-hub");
+            });
 
             // 数据库初始化数据
             using (var scope = context.ServiceProvider.CreateScope())

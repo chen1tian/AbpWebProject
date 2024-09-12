@@ -11,6 +11,11 @@
             <param name="services"></param>
             <exception cref="T:System.NotImplementedException"></exception>
         </member>
+        <member name="M:AbpWebProject.WebApi.AbpWebProjectWebApiModule.ConfigureSignalR(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            配置SignalR
+            </summary>
+        </member>
         <member name="M:AbpWebProject.WebApi.AbpWebProjectWebApiModule.ConfigureAuthorization(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
             <summary>
             配置权限
