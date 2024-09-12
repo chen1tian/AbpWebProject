@@ -44,6 +44,7 @@ using Polly;
 using Microsoft.AspNetCore.SignalR;
 using AbpWebProject.Domain.SignalR;
 using Volo.Abp.AspNetCore.SignalR;
+using Microsoft.Extensions.Primitives;
 
 namespace AbpWebProject.WebApi
 {
@@ -309,6 +310,30 @@ namespace AbpWebProject.WebApi
                     c.SwaggerEndpoint("/AbpWebProject/swagger/v1/swagger.json", "AbpWebProject API");
                 });
             }
+
+            // 处理querystring中的access_token sigalR会通过此方式传递access_token
+            app.Use(async (ctx, next) =>
+            {
+                var query = ctx.Request.Query;
+                StringValues accessTokens = new StringValues();
+                query.TryGetValue("access_token", out accessTokens);
+
+                if (accessTokens.Count > 0)
+                {
+                    var tokens = accessTokens.First();
+                    var authKey = "Authorization";
+                    if (ctx.Request.Headers.ContainsKey(authKey))
+                    {
+                        ctx.Request.Headers.Remove(authKey);
+                    }
+
+                    ctx.Request.Headers.Add(authKey, $"Bearer {tokens}");
+
+                    // await Console.Out.WriteLineAsync($"获取到querystring中的access token 【{tokens}】，将其增加到header中。");
+                }
+
+                await next();
+            });
 
             app.UseAuthentication();
             app.UseAuthorization();
