@@ -1,5 +1,5 @@
-name: AbpWebProject
-registry: docker-registry.dev.hrrdqh.com/<K8sProject>
+﻿name: AbpWebProject
+registry: docker-registry.dev.yourcompany.com/<K8sProject>
 namespace: <NameSpace>
 #extensions:
 #- name: dapr
